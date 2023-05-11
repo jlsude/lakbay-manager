@@ -3,20 +3,24 @@
         <!-- ----------------------------- -->
         <div style = "display: flex; flex-direction: column; justify-content: space-around; 
         background-color: #d9d9d9; 
-        width: 50vh; height: 100vh;; margin-left: -0.5vw; margin-top: -0.5vw;
-        gap: 0.75rem; position: fixed;">
+        width: 50vh; height: 100vh;; margin-left: -0.5vw; margin-top: -0.5vw; position: fixed;">
             <div class="logo-container1">
                 <img class="logo1" src="../assets/LakbayLogo.png" alt="Lakbay Logo">
-            </div>
-            <div>
-                <h4 style = "text-align: center; font-size: 1.4vw; margin: auto;">Dashboard</h4>
-                <h3 style = "text-align: center; font-size: 1vw;">Manager: {{ userProfile.user_firstname }} {{ userProfile.user_lastname }}</h3>
 
+                <h4 style = "text-align: center; font-size: 1.4vw; margin-top: 10vh; margin-bottom: auto;">Dashboard</h4>
+                <h3 style = "text-align: center; font-size: 1vw;">Manager: {{ userProfile.user_firstname }} {{ userProfile.user_lastname }}</h3>
+                
+                <button class = "InterfaceButtons" v-on:click = "reDirectManage" style = "margin-top: 10vh;">Manage Landmarks</button>
             </div>
-            <div style = "display: flex; flex-direction: column; justify-content: column; gap: calc(100%/7);
+            <div style = "display: flex; flex-direction: column; justify-content: column;
+                align-items: center;">
+                
+            </div>
+            
+            <div style = "display: flex; flex-direction: column; justify-content: flex-end; gap: calc(100%/7);
                 align-items: center;">
 
-                <button class = "InterfaceButtons" v-on:click = "reDirectManage">Manage Landmarks</button>
+                
                 <button class = "InterfaceButtonLogout" @click = "Logout">Logout</button>
                 
             </div>
@@ -63,7 +67,7 @@ export default {
 					alert('Your session has expired. Please login again.');
 					console.log('Session expired, signing out')
 					Cookies.remove('auth_token'); 
-					this.$router.push({name: 'adminlogin'});
+					this.$router.push({name: 'login'});
 				} else {
 					console.log(error);
 				}
@@ -73,20 +77,20 @@ export default {
 				console.log('clearing cookie')
                 Cookies.remove('auth_token'); 
                 this.authToken = ''
-				this.$router.push({name: 'adminlogin'});
+				this.$router.push({name: 'login'});
 			};
     },
     methods: {
 
         reDirectManage(){
-            this.$router.push({name: 'home'})
+            this.$router.push({name: 'manage'})
         },
         Logout(){
 
             console.log('deleting cookie')
             Cookies.remove('auth_token'); 
             this.authToken = ''
-            this.$router.push({name: 'adminlogin'});
+            this.$router.push({name: 'login'});
         }
 
 
@@ -99,6 +103,7 @@ export default {
     .logo-container1 {
         max-width: 100%;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
 
